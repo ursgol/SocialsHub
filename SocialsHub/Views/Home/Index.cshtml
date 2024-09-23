@@ -1,0 +1,52 @@
+﻿@using SocialsHub.Core.Models.Domains
+@model IEnumerable<ApplicationUser>
+
+
+<div class="text-center">
+    <nav style="background-image: linear-gradient(to right, pink , orange);">
+       <h1 style="padding: 20px 10px 0 0; margin-bottom:0; color: white; text-transform:uppercase;">
+           SocialsHub's top 10
+       </h1>
+        <p style="color:white; padding: 20px;"> Check out Social's most popular profiles</p>
+
+
+    </nav>
+
+ 
+
+    @if (Model.Any())
+    {
+       
+        foreach (var user in Model)
+        {
+            <div class="card mb-3 usersTable">
+
+           
+
+
+                    <div>
+                        <img src="/images/logo.jpg" width="5%" alt="Alternate Text" />
+                        <p>
+                        <a href="Link/Links/@user.Name">@user.Name</a>
+
+                    </p>
+                        <p>
+                            @user.Content
+                        </p>
+                        <p>
+                            @user.Email
+                        </p>
+                    </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                No Users Added Yet
+            </div>
+        </div>
+    }
+  </div>

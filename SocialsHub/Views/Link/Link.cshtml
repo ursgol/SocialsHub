@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Create Link";
+}
+
+<div>
+    @await Html.PartialAsync("_LinkTable")
+</div>
+
+
+
+
+<!-- The sidebar -->
+<div class="sidebar" style="fixed">
+    <a class="active" href="/Link/Link">Create Link</a>
+    <a href="/Link/MyLinks">My Links</a>
+    <a href="/Link/Themes">Links Theme</a>
+    <a href="/Identity/Account/Manage/ChangePassword">Change password</a>
+    <a href="/Identity/Account/Manage">Edit Profile</a>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
+</div>
+<!-- Page content -->
+<div id="rocks" style="margin-left:250px; margin-top: 1000px;">
+    hjsjhd
+</div>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#addLink').submit(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Link", "Link")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $('#linksTable').html(data);
+                    },
+                    error: function (data) {
+                        alert(data.message)
+                    },
+                    dataType: "html"
+                });
+                return false;
+            });
+        });
+    </script>
+}

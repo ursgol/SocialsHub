@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewData["Title"] = "Links Theme";
+}
+
+<h2 style="margin-left: 250px;">Links Theme</h2>
+
+
+
+<form action="/Link/Links" style="margin-left:250px">
+    <label for="favcolor">Select your favorite color:</label>
+    <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+    <p><input type="submit" value="Submit"></p>
+</form>
+
+
+
+
+
+
+<div class="sidebar" style="fixed">
+    <a class="active" href="/Link/Link">Create Link</a>
+    <a href="/Link/MyLinks">My Links</a>
+    <a href="/Link/Themes">Links Theme</a>
+    <a href="/Identity/Account/Manage/ChangePassword">Change password</a>
+    <a href="/Identity/Account/Manage">Edit Profile</a>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+      
+
+     
+      
+    </script>
+}

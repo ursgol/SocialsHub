@@ -1,0 +1,41 @@
+﻿@model SocialsHub.Core.ViewModels.LinksViewModel
+
+
+
+@*formularz filtrowania*@
+<form id="filterForm">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            @Html.TextBoxFor(x => x.FilterProfiles.Name,
+                     new { @class = "form-control mb-2", placeholder = "Tytuł" })
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Szukaj</button>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#filterForm').submit(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Links", "Link")",
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#usersTable').html(data);
+                },
+                error: function (data) {
+                    alert(data.message)
+                },
+                dataType: "html"
+            });
+            return false;
+        });
+    });
+
+</script>
+}

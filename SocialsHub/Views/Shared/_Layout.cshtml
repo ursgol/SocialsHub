@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SocialsHub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SocialsHub.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <partial name="_LoginPartial" />
+
+                    </li>
+                    <li>
+                 @if (User.Identity.IsAuthenticated)
+                {
+                        <a class="navbar-brand d-sm-flex justify-content-center" asp-area="" asp-controller="Link" asp-action="Link">
+                            <p style="font-size: 1rem; margin: 5px;">Settings</p>
+                        </a>
+                    
+                }</li>
+                </ul>
+                <a class="navbar-brand d-sm-flex justify-content-center" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="/images/logo.jpg" width="4%" alt="logo" />
+                        <p style="font-size: 12px; margin: 8px;font-family:Arial"><strong>SocialsHub</strong></p>
+                </a>
+               
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Link" asp-action="Links">Profile</a>
+\
+
+                </div>
+                
+               
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - SocialsHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

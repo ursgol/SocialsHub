@@ -1,0 +1,144 @@
+﻿@model IEnumerable<SocialsHub.Core.Models.Domains.Link>
+
+@{
+    ViewData["Title"] = "My Links";
+}
+
+<h2 style="margin-left: 250px;">My Links</h2>
+
+
+
+<div id="linksTable">
+    <table class="table mt-3 table-bordered" style="margin-left: 250px; width: 50%;">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Url</th>
+                <th scope="col">Is Active</th>
+
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model !=null && Model.Any())
+            {
+                foreach (var link in Model)
+                {
+                    <tr>
+                        <td>
+                           @link.Name
+                        </td>
+                        <td>
+                            @link.Url
+                        </td>
+                        <td>
+                      @link.IsActive
+
+                        </td>
+                        <td>
+
+                            <button class="btn btn-danger btn-sm mr-2" onclick="deleteLink('@link.Id', this)">
+                                Usuń
+                            </button>
+                            <a href="@Url.Action("Link", "Link", new {id=link.Id})" class="btn btn-warning btn-sm mr-2">Update</a>
+                          
+                                <button class="btn btn-success btn-sm mr-2" onclick="activeLink('@link.Id', this)">
+                                    Aktywuj/Deaktywuj
+                                </button>
+                            
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="5">
+                        No links!
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="sidebar" style="fixed">
+    <a class="active" href="/Link/Link">Create Link</a>
+    <a href="/Link/MyLinks">My Links</a>
+    <a href="/Link/Themes">Links Theme</a>
+    <a href="/Identity/Account/Manage/ChangePassword">Change password</a>
+    <a href="/Identity/Account/Manage">Edit Profile</a>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function deleteLink(id, btn) {
+            if (!confirm("Czy na pewno chcesz usunąć link?"))
+                return;
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Delete", "Link")",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.success) {
+                        var row = btn.parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    } else {
+                        alert(data.message);
+
+                    }
+                },
+                error: function (data) {
+                    alert(data.message);
+                },
+                dataType: "json"
+            });
+        }
+
+
+
+        function activeLink(id, btn) {
+            if (!confirm("Czy na pewno chcesz oznaczyć zadanie jako aktywować lub deaktywować?"))
+                return;
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Activate", "Link")",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.success) {
+                        alert("Success");
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (data) {
+                    alert(data.message);
+                },
+                dataType: "json"
+            });
+        }
+
+
+        
+    </script>
+}
+
