@@ -30,13 +30,15 @@
                         <img src="/images/logo.jpg" width="4%" alt="logo" />
                         <p style="font-size: 12px; margin: 8px;font-family:Arial"><strong>SocialsHub</strong></p>
                 </a>
-               
+                  @if (User.Identity.IsAuthenticated)
+                {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Link" asp-action="Links">Profile</a>
-\
 
-                </div>
-                
+
+                    </div>
+                }
+
                
             </div>
         </nav>

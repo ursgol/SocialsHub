@@ -12,11 +12,13 @@ namespace SocialsHub.Persistence
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UnitOfWork(IApplicationDbContext context)
+        public UnitOfWork(IApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
-            Links = new LinkRepository(context);
+            _userManager = userManager;
+            Links = new LinkRepository(context, userManager);
 
 
         }

@@ -8,6 +8,7 @@ namespace SocialsHub.Core.Repositories
 
         IEnumerable<Link> Get(string userId, string Name = null, string Email = null);
         Link Get(int id, string userId);
+        IEnumerable<Link> GetLinks(string username);
 
         void Add(Link link);
 

@@ -8,7 +8,10 @@
 
 var bcolor = getUrlVars()["favcolor"].replace("%23", "#");
 
-const nodeList = document.querySelectorAll(".tableRow");
-for (let i = 0; i < nodeList.length; i++) {
-    nodeList[i].style.backgroundColor = bcolor;
+if (bcolor){
+
+    const nodeList = document.querySelectorAll(".tableRow");
+    for (let i = 0; i < nodeList.length; i++) {
+        nodeList[i].style.backgroundColor = bcolor;
+    }
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SocialsHub.Core.Models.Domains.Link>
+
+
+@{
+    string bcolor = ViewBag.bcolor;
+}
+
+<div class="container" style="margin-top: 20px;">
+    Take your link and use it: <a href=""><strong style="color:cornflowerblue">\Links\yourUserName</strong></a>
+    <div class="d-flex d-xl-inline-flex">
+        <img src="/images/logo.jpg" width="14%" style="margin-top: 10px;" alt="Alternate Text" />
+
+    </div>
+
+
+
+
+    <div class="container">
+        <table class="table m-5 table-row" style="width: 40%; border-color: white;">
+
+            <tbody>
+                @if (Model !=null && Model.Any())
+                {
+                    foreach (var task in Model)
+                    {
+                        if (task.IsActive == true)
+                        {
+                            <tr class="tableRow" style="margin-top: 20px;">
+                                <td style="border-radius: 30px; padding: 10px; text-align: center;">
+                                    <a href="https://@task.Url" style="color:white; text-decoration:none;" _target="_blank">@task.Name</a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="text-center" colspan="5">
+                            No links!
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

@@ -125,6 +125,7 @@
                 },
                 success: function (data) {
                     if (data.success) {
+                        window.location.reload();
                         alert("Success");
                     } else {
                         alert(data.message);

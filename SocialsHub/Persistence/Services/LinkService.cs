@@ -13,7 +13,11 @@ namespace SocialsHub.Persistence.Services
         {
             _unitOfWork = unitOfWork;
         }
-
+        public IEnumerable<Link> GetLinks(string username)
+        {
+            return _unitOfWork.Links.GetLinks(username);
+        }
+        
         public IEnumerable<Link> GetLinks()
         {
             return _unitOfWork.Links.GetLinks();

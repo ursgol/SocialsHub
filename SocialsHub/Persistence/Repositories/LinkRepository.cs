@@ -1,20 +1,38 @@
-﻿using SocialsHub.Core;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using NuGet.Versioning;
+using SocialsHub.Core;
 using SocialsHub.Core.Models.Domains;
 using SocialsHub.Core.Repositories;
+using System.Linq;
 
 namespace SocialsHub.Persistence.Repositories
 {
     public class LinkRepository : ILinkRepository
     {
         private IApplicationDbContext _context;
+        private  UserManager<ApplicationUser> _userManager; 
 
-        public LinkRepository(IApplicationDbContext context)
+        public LinkRepository(IApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+        }
+
+        public IEnumerable<Link> GetLinks(string username)
+        {
+            var user = _userManager.Users.Single(x => x.Name == username);
+           
+            var links = _context.Links.Where(x => x.UserId == user.Id);
+
+            return links.ToList();
+
         }
 
 
-     
+
+
+
 
         public IEnumerable<Link> GetLinks()
         {
@@ -45,6 +63,9 @@ namespace SocialsHub.Persistence.Repositories
 
         public void Add(Link link)
         {
+            if (link.Url== null && link.Name==null)
+                return;
+
             _context.Links.Add(link);
 
         }

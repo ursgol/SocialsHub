@@ -22,7 +22,11 @@ namespace SocialsHub.Controllers
             _userManager = userManager;
         }
 
-    
+
+     
+        
+
+
 
 
         [AllowAnonymous]
@@ -32,7 +36,7 @@ namespace SocialsHub.Controllers
             var vm = new LinksViewModel
             {
                 FilterProfiles = new FilterProfiles(),
-                Links =(ICollection<Link>)_linkService.Get(userId),
+                Links =(ICollection<Link>)_linkService.Get(userId)
             };
             return View(vm);
         }
@@ -60,7 +64,9 @@ namespace SocialsHub.Controllers
             return View(links);
         }
 
-        [AllowAnonymous]
+
+
+
         [HttpPost]
         public IActionResult Links(LinksViewModel viewModel)
         {
@@ -122,7 +128,7 @@ namespace SocialsHub.Controllers
 
 
 
-            return RedirectToAction("Links");
+            return RedirectToAction("MyLinks");
 
         }
 

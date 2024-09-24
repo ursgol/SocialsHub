@@ -15,16 +15,26 @@ namespace SocialsHub.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private UserManager<ApplicationUser>   _userManager;
+        private ILinkService _linkService;
 
 
 
-        public HomeController(ILogger<HomeController> logger,UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, ILinkService linkservice, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _userManager = userManager;
+            _linkService = linkservice;
         }
 
-
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Links/{username}")]
+        public IActionResult Links(string username)
+        {
+            ViewBag.Name = username;
+            var links = _linkService.GetLinks(username);
+            return View("_LinksUserTable", links);
+        }
 
 
         [HttpGet]

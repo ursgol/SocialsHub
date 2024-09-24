@@ -13,5 +13,6 @@ namespace SocialsHub.Core.Services
         Link Get(int id, string userId);
 
         void Activate(int id, string userId);
+        IEnumerable<Link> GetLinks(string username);
     }
 }

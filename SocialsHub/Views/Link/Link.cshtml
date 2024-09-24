@@ -36,7 +36,9 @@
                     url: "@Url.Action("Link", "Link")",
                     data: $(this).serialize(),
                     success: function (data) {
-                        $('#linksTable').html(data);
+                            $('#linksTable').html(data);
+                            $("#addLink").trigger('reset');
+                             window.location.href = "https://localhost:44370/Link/MyLinks";
                     },
                     error: function (data) {
                         alert(data.message)
